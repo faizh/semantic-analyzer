@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller {
+class Profile extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -21,8 +21,8 @@ class Dashboard extends CI_Controller {
 
 	public function index()
 	{
-		$data['content'] 		= 'pages/v_dashboard';
-		$data['menu']			= 'dashboard';
+		$data['content'] 		= 'pages/v_profile';
+		$data['menu']			= 'profile';
 		$this->load->view('layouts/v_layout', $data);
 	}
 	
