@@ -21,8 +21,15 @@ class Report extends CI_Controller {
 
 	public function index()
 	{
-		$data['content'] 		= 'pages/v_reports';
+		$data['content'] 		= 'pages/v_report_table';
 		$data['menu']			= 'report';
+		$this->load->view('layouts/v_layout', $data);
+	}
+
+	public function chart()
+	{
+		$data['content'] 		= 'pages/v_report_chart';
+		$data['menu']			= 'chart';
 		$this->load->view('layouts/v_layout', $data);
 	}
 	

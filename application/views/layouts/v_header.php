@@ -18,6 +18,8 @@
 
 	<link href="<?= base_url() ?>assets/css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 </head>
 
 <body>
@@ -39,14 +41,24 @@
             </a>
 					</li>
 
-					<li class="sidebar-item <?= ($menu == 'report') ? 'active' : '' ?>">
-						<a class="sidebar-link" href="<?= base_url() ?>index.php/report">
-              <i class="align-middle" data-feather="book"></i> <span class="align-middle">Reports</span>
-            </a>
-					</li>
 					<li class="sidebar-item <?= ($menu == 'profile') ? 'active' : '' ?>">
 						<a class="sidebar-link" href="<?= base_url() ?>index.php/profile">
               <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
+            </a>
+					</li>
+
+					<li class="sidebar-header">
+						Reports
+					</li>
+
+					<li class="sidebar-item <?= ($menu == 'report') ? 'active' : '' ?>">
+						<a class="sidebar-link" href="<?= base_url() ?>index.php/report">
+              <i class="align-middle" data-feather="book"></i> <span class="align-middle">Table</span>
+            </a>
+					</li>
+					<li class="sidebar-item <?= ($menu == 'chart') ? 'active' : '' ?>">
+						<a class="sidebar-link" href="<?= base_url() ?>index.php/report/chart">
+              <i class="align-middle" data-feather="pie-chart"></i> <span class="align-middle">Chart</span>
             </a>
 					</li>
 		</nav>
