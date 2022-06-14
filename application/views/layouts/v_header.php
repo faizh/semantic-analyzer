@@ -41,6 +41,18 @@
             </a>
 					</li>
 
+					<li class="sidebar-item <?= ($menu == 'data_latih') ? 'active' : '' ?>">
+						<a class="sidebar-link" href="<?= base_url() ?>index.php/data/data_latih">
+              <i class="align-middle" data-feather="database"></i> <span class="align-middle">Data Latih</span>
+            </a>
+					</li>
+
+					<li class="sidebar-item <?= ($menu == 'data_uji') ? 'active' : '' ?>">
+						<a class="sidebar-link" href="<?= base_url() ?>index.php/data/data_uji">
+              <i class="align-middle" data-feather="edit-3"></i> <span class="align-middle">Data Uji</span>
+            </a>
+					</li>
+
 					<li class="sidebar-item <?= ($menu == 'profile') ? 'active' : '' ?>">
 						<a class="sidebar-link" href="<?= base_url() ?>index.php/profile">
               <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
@@ -209,16 +221,12 @@
               </a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                <img src="<?= base_url() ?>assets/img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">Charles Hall</span>
+                <img src="<?= base_url() ?>assets/img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark"><?= $this->session->userdata('sess_user_name') ?></span>
               </a>
 							<div class="dropdown-menu dropdown-menu-end">
-								<a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
-								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
+								<a class="dropdown-item" href="<?= base_url() ?>index.php/profile"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
-								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Log out</a>
+								<a class="dropdown-item" href="<?= base_url() ?>index.php/login/act_logout">Log out</a>
 							</div>
 						</li>
 					</ul>

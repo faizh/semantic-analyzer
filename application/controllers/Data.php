@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Report extends CI_Controller {
+class Data extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -29,17 +29,17 @@ class Report extends CI_Controller {
 		}
 	}
 	
-	public function index()
+	public function data_latih()
 	{
-		$data['content'] 		= 'pages/v_report_table';
-		$data['menu']			= 'report';
+		$data['content'] 		= 'pages/v_data_latih';
+		$data['menu']			= 'data_latih';
 		$this->load->view('layouts/v_layout', $data);
 	}
 
-	public function chart()
+	public function data_uji()
 	{
-		$data['content'] 		= 'pages/v_report_chart';
-		$data['menu']			= 'chart';
+		$data['content'] 		= 'pages/v_data_uji';
+		$data['menu']			= 'data_uji';
 		$this->load->view('layouts/v_layout', $data);
 	}
 	

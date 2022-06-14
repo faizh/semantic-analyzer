@@ -19,6 +19,16 @@ class Dashboard extends CI_Controller {
 	 * @see https://codeigniter.com/userguide3/general/urls.html
 	 */
 
+	function __construct()
+	{
+		parent::__construct();
+		$sess_login		= $this->session->userdata('sess_login');
+		if($sess_login != 1)
+		{
+			redirect('login');
+		}
+	}
+
 	public function index()
 	{
 		$data['content'] 		= 'pages/v_dashboard';

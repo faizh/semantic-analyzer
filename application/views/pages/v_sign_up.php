@@ -10,13 +10,13 @@
 	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel="shortcut icon" href="<?= base_url() ?>assets/img/icons/icon-48x48.png" />
+	<link rel="shortcut icon" href="<?= base_url()?>assets/img/icons/icon-48x48.png" />
 
-	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-sign-in.html" />
+	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-sign-up.html" />
 
-	<title>Sign In | AdminKit Demo</title>
+	<title>Sign Up | AdminKit Demo</title>
 
-	<link href="<?= base_url() ?>assets/css/app.css" rel="stylesheet">
+	<link href="<?= base_url()?>assets/css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
@@ -28,26 +28,35 @@
 					<div class="d-table-cell align-middle">
 
 						<div class="text-center mt-4">
-							<h1 class="h2">Sentiment-Analyzer</h1>
+							<h1 class="h2">Semantic-Analyzer</h1>
 							<p class="lead">
-								Sign in to your account to continue
+								Start creating the best possible user experience for you customers.
 							</p>
 						</div>
 
 						<div class="card">
 							<div class="card-body">
 								<div class="m-sm-4">
-									<form method="post" action="<?= base_url()?>index.php/login/act_login">
+									<form method="post" action="<?= base_url() ?>index.php/register/act_signup">
+										<div class="mb-3">
+											<label class="form-label">Name</label>
+											<input class="form-control form-control-lg" type="text" name="name" placeholder="Enter your name" required />
+										</div>
 										<div class="mb-3">
 											<label class="form-label">Username</label>
 											<input class="form-control form-control-lg" type="text" name="username" placeholder="Enter your username" required />
 										</div>
 										<div class="mb-3">
+											<label class="form-label">Email</label>
+											<input class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email" required />
+										</div>
+										<div class="mb-3">
 											<label class="form-label">Password</label>
-											<input class="form-control form-control-lg" type="password" name="password" placeholder="Enter your password" required />
+											<input class="form-control form-control-lg" type="password" name="password" placeholder="Enter password" required />
 										</div>
 										<div class="text-center mt-3">
-											<button type="submit" class="btn btn-lg btn-primary">Sign in</button>
+											<!-- <a href="index.html" class="btn btn-lg btn-primary">Sign up</a> -->
+											<button type="submit" class="btn btn-lg btn-primary">Sign up</button>
 										</div>
 									</form>
 								</div>
@@ -60,7 +69,7 @@
 		</div>
 	</main>
 
-	<script src="<?= base_url() ?>assets/js/app.js"></script>
+	<script src="<?= base_url()?>assets/js/app.js"></script>
 
 </body>
 
