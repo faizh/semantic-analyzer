@@ -38,6 +38,19 @@ class Report extends CI_Controller {
 
 	public function chart()
 	{
+		$this->load->model('m_data_tweets');
+
+		$positive_tweets		= $this->m_data_tweets->getByAttributes(array('sentiment' => 'positive'));
+		$negative_tweets		= $this->m_data_tweets->getByAttributes(array('sentiment' => 'negative'));
+		$neutral_tweets			= $this->m_data_tweets->getByAttributes(array('sentiment' => 'neutral'));
+
+		$data['data_tweets']	= array(
+			'positive_tweets'	=> $positive_tweets,
+			'negative_tweets'	=> $negative_tweets,
+			'neutral_tweets'	=> $neutral_tweets
+		);
+
+
 		$data['content'] 		= 'pages/v_report_chart';
 		$data['menu']			= 'chart';
 		$this->load->view('layouts/v_layout', $data);

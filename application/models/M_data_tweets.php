@@ -3,7 +3,15 @@ class M_data_tweets extends CI_Model {
 	
 	public function insert($data)
     {
-		$this->db->insert('t_users',$data);
+		$this->db->insert('t_data_tweets',$data);
+    }
+
+    public function getByAttributes($attributes=array())
+    {
+        $this->db->where($attributes);
+        $results = $this->db->get('t_data_tweets')->result();
+
+        return $results;
     }
 
     public function getUserDataRow($attributes = array())
@@ -34,6 +42,27 @@ class M_data_tweets extends CI_Model {
         $results = $this->db->get('t_data_tweets')->result();
 
         return $results;
+    }
+
+    public function delete_all()
+    {
+        $this->db->truncate('t_data_tweets');
+    }
+
+    public function getRandomTweets()
+    {
+        $this->db->select('*');
+        $results = $this->db->get('t_data_tweets')->result();
+        
+        $cnt_all_tweets = count($results);
+        $random_amount  = round((10 / 100) * $cnt_all_tweets);
+
+        $this->db->select('*');
+        $this->db->order_by('RAND()');
+        $this->db->limit($random_amount);
+        $random_tweets = $this->db->get('t_data_tweets')->result();
+
+        return $random_tweets;
     }
 	
 }

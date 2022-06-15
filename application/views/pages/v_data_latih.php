@@ -7,7 +7,7 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header">
-						<button class="btn btn-primary">Import Data Twitter</button>
+						<a href="<?= base_url() ?>index.php/data/import_data_tweet"><button class="btn btn-primary">Import Data Twitter</button></a>
 						<div class="row">
 							<div class="col-12 col-lg-12 col-xxl-9 d-flex">
 								<div class="flex-fill" style="padding: 10px;">

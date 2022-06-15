@@ -1,37 +1,37 @@
 <main class="content">
 	<div class="container-fluid p-0">
 
-		<h1 class="h3 mb-3">Data Uji</h1>
+		<h1 class="h3 mb-3">Data Latih</h1>
 
 		<div class="row">
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header">
+						<a href="<?= base_url() ?>index.php/data/create_data_uji"><button class="btn btn-primary">Get Data Uji</button></a>
 						<div class="row">
 							<div class="col-12 col-lg-12 col-xxl-9 d-flex">
-								<div class="card flex-fill">
-									<div class="card-header">
-									</div>
+								<div class="flex-fill" style="padding: 10px;">
 									<table class="table" id="example">
 										<thead>
 											<tr>
-												<th>Name</th>
-												<th class="d-none d-xl-table-cell">Start Date</th>
-												<th class="d-none d-xl-table-cell">End Date</th>
-												<th>Status</th>
-												<th class="d-none d-md-table-cell">Assignee</th>
+												<th style="text-align: center;" class="d-none d-xl-table-cell" width="80%">Tweet</th>
+												<th style="text-align: center;" class="d-none d-xl-table-cell" width="20%">Sentiment</th>
 											</tr>
 										</thead>
 										<tbody>
-											<?php for ($i=0; $i < 100; $i++) { ?>
+											<?php 
+											if (count($data_uji) == 0) { ?>
 												<tr>
-													<td>Project Apollo</td>
-													<td class="d-none d-xl-table-cell"><?= $i ?></td>
-													<td class="d-none d-xl-table-cell">31/06/2021</td>
-													<td><span class="badge bg-success">Done</span></td>
-													<td class="d-none d-md-table-cell">Vanessa Tucker</td>
+													<td style="text-align: center;" colspan="2">No Data</td>
 												</tr>
-											<?php } ?>
+											<?php }else{
+												foreach ($data_uji as $tweet) { ?>
+													<tr>
+														<td><?= $tweet->clean_tweet ?></td>
+														<td><?= $tweet->sentiment ?></td>
+													</tr>
+												<?php }
+											} ?>
 										</tbody>
 									</table>
 								</div>
