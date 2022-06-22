@@ -31,6 +31,22 @@ class Dashboard extends CI_Controller {
 
 	public function index()
 	{
+		$this->load->model('m_data_tweets');
+
+		$positive_tweets		= $this->m_data_tweets->getByAttributes(array('sentiment' => 'positive'));
+		$negative_tweets		= $this->m_data_tweets->getByAttributes(array('sentiment' => 'negative'));
+		$neutral_tweets			= $this->m_data_tweets->getByAttributes(array('sentiment' => 'neutral'));
+		$total_tweet_words 		= $this->m_data_tweets->getTotalWords();
+		$count_total_tweets 	= $this->m_data_tweets->countTotalTweets();
+
+		$data 					= array(
+			'positive'			=> count($positive_tweets),
+			'negative'			=> count($negative_tweets),
+			'neutral'			=> count($neutral_tweets),
+			'total_tweet_words'	=> $total_tweet_words,
+			'total_tweets' 		=> $count_total_tweets
+		);
+
 		$data['content'] 		= 'pages/v_dashboard';
 		$data['menu']			= 'dashboard';
 		$this->load->view('layouts/v_layout', $data);

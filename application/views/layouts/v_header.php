@@ -60,12 +60,12 @@
 					</li>
 
 					<li class="sidebar-header">
-						Reports
+						Reports Naive Bayes
 					</li>
 
 					<li class="sidebar-item <?= ($menu == 'report') ? 'active' : '' ?>">
 						<a class="sidebar-link" href="<?= base_url() ?>index.php/report">
-              <i class="align-middle" data-feather="book"></i> <span class="align-middle">Table</span>
+              <i class="align-middle" data-feather="book"></i> <span class="align-middle">Table Hasil Uji</span>
             </a>
 					</li>
 					<li class="sidebar-item <?= ($menu == 'chart') ? 'active' : '' ?>">

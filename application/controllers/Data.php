@@ -1,4 +1,5 @@
 <?php
+ini_set('max_execution_time', 0);
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Data extends CI_Controller {
@@ -55,10 +56,28 @@ class Data extends CI_Controller {
 		$this->load->view('layouts/v_layout', $data);
 	}
 
-	public function get_data_tweet()
+	public function get_data_tweet($start_date, $end_date)
 	{
-		$response = file_get_contents('http://127.0.0.1:4996/getTweets');
-		$response = json_decode($response);
+		$postdata = http_build_query(
+		    array(
+		        'start_date' 	=> $start_date,
+		        'end_date'		=> $end_date
+		    )
+		);
+
+		$opts = array('http' =>
+		    array(
+		        'method'  => 'POST',
+		        'header'  => 'Content-Type: application/x-www-form-urlencoded',
+		        'timeout' => 1200,
+		        'content' => $postdata
+		    )
+		);
+
+		$context  	= stream_context_create($opts);
+
+		$result 	= file_get_contents('http://127.0.0.1:4996/getTweets', false, $context);
+		$response 	= json_decode($result);
 
 		return $response;
 	}
@@ -66,39 +85,57 @@ class Data extends CI_Controller {
 	public function import_data_tweet()
 	{
 		$this->load->model('m_data_tweets');
+		$this->load->model('m_data_uji');
 
-		$data_tweets = $this->get_data_tweet();
+		$start_date 	= $this->input->post('start_date');
+		$end_date 		= $this->input->post('end_date');
 
-		$this->m_data_tweets->delete_all();
+		// converted to standard date twitter api
+		$start_date 	= new DateTime($start_date.' 00:00:00');
+		$end_date 		= new DateTime($end_date.' 00:00:00');
+		$start_date 	= $start_date->format('Y-m-d\TH:i:s\Z');
+		$end_date 		= $end_date->format('Y-m-d\TH:i:s\Z');
 
-		foreach ($data_tweets as $tweet) {
-			$tweet_id 			= $tweet->tweet_id;
-			$author_id 			= $tweet->author_id;
-			$clean_tweet 		= $tweet->clean_tweet;
-			$original_tweet 	= $tweet->original_tweet;
-			$polarity 			= $tweet->polarity;
-			$sentiment 			= $tweet->sentiment;
-			$created_dtm 		= $this->convert_to_datetime($tweet->created_dtm);
+		$data_tweets 	= $this->get_data_tweet($start_date, $end_date);
 
-			$data_insert = array(
-				'tweet_id'			=> $tweet_id,
-				'tweet_author_id'	=> $author_id,
-				'clean_tweet'		=> $clean_tweet,
-				'original_tweet'	=> $original_tweet,
-				'polarity'			=> $polarity,
-				'sentiment'			=> $sentiment,
-				'created_dtm'		=> $created_dtm
-			);
+		if (!empty($data_tweets) && count($data_tweets) > 0) {
+			// $this->m_data_tweets->delete_all();
+			$this->m_data_uji->delete_all();
 
-			$this->m_data_tweets->insert($data_insert);
+			foreach ($data_tweets as $tweet) {
+				
+				$check_tweet_id 	= $this->m_data_tweets->getByAttributes(array('tweet_id' => $tweet->tweet_id));
+				if (count($check_tweet_id) > 0) {
+					continue;
+				}
+
+				$tweet_id 			= $tweet->tweet_id;
+				$author_id 			= $tweet->author_id;
+				$clean_tweet 		= $tweet->clean_tweet;
+				$original_tweet 	= $tweet->original_tweet;
+				$polarity 			= $tweet->polarity;
+				$sentiment 			= $tweet->sentiment;
+				$created_dtm 		= $this->convert_to_datetime($tweet->created_dtm);
+
+				$data_insert = array(
+					'tweet_id'			=> $tweet_id,
+					'tweet_author_id'	=> $author_id,
+					'clean_tweet'		=> $clean_tweet,
+					'original_tweet'	=> $original_tweet,
+					'polarity'			=> $polarity,
+					'sentiment'			=> $sentiment,
+					'created_dtm'		=> $created_dtm
+				);
+
+				$this->m_data_tweets->insert($data_insert);
+			}	
 		}
 
 		redirect('data/data_latih');
 	}
 
-	public function convert_to_datetime()
+	public function convert_to_datetime($date)
 	{
-		$date = "2022-06-15T02:49:10.000Z";
 		$date = new DateTime($date);
 		$date = $date->format('Y-m-d H:i:s');
 		

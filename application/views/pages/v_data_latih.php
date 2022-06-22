@@ -7,7 +7,24 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header">
-						<a href="<?= base_url() ?>index.php/data/import_data_tweet"><button class="btn btn-primary">Import Data Twitter</button></a>
+							<form method="post" action="<?= base_url() ?>index.php/data/import_data_tweet">
+								<div class="row">
+									<div class="card-body col-2">
+										<label>Start Date</label>
+										<input type="date" name="start_date" class="form-control" placeholder="Input" required>
+									</div>
+									<div class="card-body col-2">
+										<label>End Date</label>
+										<input type="date" name="end_date" class="form-control" placeholder="Input" required>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-3">
+										<button type="submit" class="form-control btn btn-primary">Import Data Twitter</button>
+									</div>
+								</div>
+							</br>
+							</form>
 						<div class="row">
 							<div class="col-12 col-lg-12 col-xxl-9 d-flex">
 								<div class="flex-fill" style="padding: 10px;">

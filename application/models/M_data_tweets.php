@@ -64,5 +64,23 @@ class M_data_tweets extends CI_Model {
 
         return $random_tweets;
     }
+
+    public function getTotalWords()
+    {
+        $query      = "SELECT SUM(LENGTH(clean_tweet) - LENGTH(REPLACE(clean_tweet, ' ', '')) + 1) as total FROM t_data_tweets";
+
+        $result = $this->db->query($query)->row();
+
+        return $result->total;
+    }
+
+    public function countTotalTweets()
+    {
+        $query      = "SELECT COUNT(*) as total FROM t_data_tweets";
+
+        $result = $this->db->query($query)->row();
+
+        return $result->total;
+    }
 	
 }

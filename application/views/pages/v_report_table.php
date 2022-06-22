@@ -1,7 +1,7 @@
 <main class="content">
 	<div class="container-fluid p-0">
 
-		<h1 class="h3 mb-3">Table Report</h1>
+		<h1 class="h3 mb-3">Data Uji + Naive Bayes</h1>
 
 		<div class="row">
 			<div class="col-12">
@@ -9,29 +9,36 @@
 					<div class="card-header">
 						<div class="row">
 							<div class="col-12 col-lg-12 col-xxl-9 d-flex">
-								<div class="card flex-fill">
-									<div class="card-header">
-									</div>
+								<div class="flex-fill" style="padding: 10px;">
 									<table class="table" id="example">
 										<thead>
 											<tr>
-												<th>Name</th>
-												<th class="d-none d-xl-table-cell">Start Date</th>
-												<th class="d-none d-xl-table-cell">End Date</th>
-												<th>Status</th>
-												<th class="d-none d-md-table-cell">Assignee</th>
+												<th style="text-align: center;" class="d-none d-xl-table-cell" width="80%">Tweet</th>
+												<th style="text-align: center;" class="d-none d-xl-table-cell" width="20%">Sentiment</th>
+												<th style="text-align: center;" class="d-none d-xl-table-cell" width="20%">Naive Bayes</th>
 											</tr>
 										</thead>
 										<tbody>
-											<?php for ($i=0; $i < 100; $i++) { ?>
+											<?php 
+											if (count($data_uji) == 0) { ?>
 												<tr>
-													<td>Project Apollo</td>
-													<td class="d-none d-xl-table-cell"><?= $i ?></td>
-													<td class="d-none d-xl-table-cell">31/06/2021</td>
-													<td><span class="badge bg-success">Done</span></td>
-													<td class="d-none d-md-table-cell">Vanessa Tucker</td>
+													<td style="text-align: center;" colspan="2">No Data</td>
 												</tr>
-											<?php } ?>
+											<?php }else{
+												foreach ($data_uji as $tweet) {
+													if ($tweet->sentiment != $tweet->naive_bayes_analysis) {
+														$class = "warning";
+													}else{
+														$class = "success";
+													}
+												 ?>
+													<tr>
+														<td><?= $tweet->clean_tweet ?></td>
+														<td><?= $tweet->sentiment ?></td>
+														<td><button class="btn btn-<?= $class ?>"><?= $tweet->naive_bayes_analysis ?></button></td>
+													</tr>
+												<?php }
+											} ?>
 										</tbody>
 									</table>
 								</div>
