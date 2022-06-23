@@ -14,7 +14,7 @@
 
 	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-sign-up.html" />
 
-	<title>Sign Up | AdminKit Demo</title>
+	<title>Sign Up | Twitter's Sentiment Analysis</title>
 
 	<link href="<?= base_url()?>assets/css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -28,9 +28,9 @@
 					<div class="d-table-cell align-middle">
 
 						<div class="text-center mt-4">
-							<h1 class="h2">Semantic-Analyzer</h1>
+							<h1 class="h2">Twitter-Analyzer</h1>
 							<p class="lead">
-								Start creating the best possible user experience for you customers.
+								Sign up to create account. Please fill the following form.
 							</p>
 						</div>
 
@@ -57,6 +57,9 @@
 										<div class="text-center mt-3">
 											<!-- <a href="index.html" class="btn btn-lg btn-primary">Sign up</a> -->
 											<button type="submit" class="btn btn-lg btn-primary">Sign up</button>
+										</div>
+										<div class="text-center mt-3">
+											<a href="<?= base_url()?>index.php/login">Already have an account? Sign In Here!</a>
 										</div>
 									</form>
 								</div>

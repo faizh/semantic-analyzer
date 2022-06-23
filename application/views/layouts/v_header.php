@@ -10,11 +10,11 @@
 	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel="shortcut icon" href="<?= base_url() ?>assets/img/icons/icon-48x48.png" />
+	<link rel="shortcut icon" href="<?= base_url()?>assets/img/icons/icon-48x48.png" />
 
 	<link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
-	<title>Semantic Analyzer</title>
+	<title>Twitter's Sentiment Analyzer</title>
 
 	<link href="<?= base_url() ?>assets/css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -27,7 +27,7 @@
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="index.html">
-          <span class="align-middle">Semantic-Analyzer</span>
+          <span class="align-middle">Twitter-Analyzer</span>
         </a>
 
 				<ul class="sidebar-nav">

@@ -14,7 +14,7 @@
 
 	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-sign-in.html" />
 
-	<title>Sign In | AdminKit Demo</title>
+	<title>Sign In | Twitter's Sentiment Analysis</title>
 
 	<link href="<?= base_url() ?>assets/css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -28,7 +28,7 @@
 					<div class="d-table-cell align-middle">
 
 						<div class="text-center mt-4">
-							<h1 class="h2">Sentiment-Analyzer</h1>
+							<h1 class="h2">Twitter-Analyzer</h1>
 							<p class="lead">
 								Sign in to your account to continue
 							</p>
@@ -48,6 +48,9 @@
 										</div>
 										<div class="text-center mt-3">
 											<button type="submit" class="btn btn-lg btn-primary">Sign in</button>
+										</div>
+										<div class="text-center mt-3">
+											<a href="<?= base_url()?>index.php/register">Don't have account? Sign Up Here!</a>
 										</div>
 									</form>
 								</div>
