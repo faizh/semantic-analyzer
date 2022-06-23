@@ -105,7 +105,7 @@ class Data extends CI_Controller {
 			foreach ($data_tweets as $tweet) {
 				
 				$check_tweet_id 	= $this->m_data_tweets->getByAttributes(array('tweet_id' => $tweet->tweet_id));
-				if (count($check_tweet_id) > 0) {
+				if (count($check_tweet_id) > 0 || $tweet->clean_tweet == '') {
 					continue;
 				}
 

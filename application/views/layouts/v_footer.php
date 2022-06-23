@@ -220,13 +220,13 @@
 	</script>
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
-			var date = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000);
+			var date = new Date(Date.now());
 			var defaultDate = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
 			document.getElementById("datetimepicker-dashboard").flatpickr({
 				inline: true,
 				prevArrow: "<span title=\"Previous month\">&laquo;</span>",
 				nextArrow: "<span title=\"Next month\">&raquo;</span>",
-				defaultDate: defaultDate
+				defaultDate: Date.now()
 			});
 		});
 	</script>

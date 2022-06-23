@@ -31,6 +31,15 @@ class Profile extends CI_Controller {
 	
 	public function index()
 	{
+		$this->load->model('m_users');
+
+		$user_id 		= $this->session->userdata('sess_user_id');
+		$user_data 		= $this->m_users->getUserDataRow(array('id' => $user_id));
+
+		$data['data']			= array(
+			'user_data'	=> $user_data
+		);
+
 		$data['content'] 		= 'pages/v_profile';
 		$data['menu']			= 'profile';
 		$this->load->view('layouts/v_layout', $data);
