@@ -85,6 +85,69 @@ class Data extends CI_Controller {
 	public function import_data_tweet()
 	{
 		$this->load->model('m_data_tweets');
+
+		$filename=$_FILES["file_csv"]["tmp_name"];
+		$i = 0;
+		$file = fopen($filename, "r");
+		$file_check = fopen($filename, "r");
+		$file_check_count=count(fgetcsv($file_check,10000,','));
+		if ($file_check_count != 3) {
+			$file_separator = ';';
+		}else{
+			$file_separator = ',';
+		}
+
+		$arr_data = array();
+		while (($emapData = fgetcsv($file, 10000, $file_separator)) !== FALSE)
+		{
+			$i++;
+			$cek[]=1;
+			if ($i==1) {
+				if (count($emapData) !== 4) {
+					echo "Kolom tidak sesuai";exit();
+				}
+			} else{
+				if($i==1) continue;
+				$tweet_id			= trim(str_replace("'","''",$emapData[0])); //replace ' jadi '' 
+				$clean_tweet 		= trim(str_replace("'","''",$emapData[1])); //replace ' jadi '' 
+				$date 				= trim(str_replace("'","''",$emapData[2])); //replace ' jadi '' 
+				$sentiment 			= strtolower(trim(str_replace("'","''",$emapData[3]))); //replace ' jadi '' 
+
+				$check = $this->m_data_tweets->getByAttributes(array("tweet_id" => $tweet_id));
+
+				if (count($check) > 0) {
+					continue;
+					echo "skip ".$tweet_id;
+				}
+
+				if ($sentiment == 1) {
+					$sentiment = 'positive';
+				}elseif ($sentiment == -1) {
+					$sentiment = 'negative';
+				}else{
+					$sentiment = 'neutral';
+				}
+
+				$arr_data = array(
+					"tweet_id"			=> $tweet_id,
+					"tweet_author_id" 	=> 1,
+					"original_tweet" 	=> "",
+					"clean_tweet"		=> $clean_tweet,
+					"polarity"			=> $sentiment,
+					"sentiment"			=> $sentiment,
+					"created_dtm"		=> $date
+				);
+
+				$this->m_data_tweets->insert($arr_data);
+			}
+		}
+
+		redirect('data/data_latih');
+	}
+
+	public function import_data_tweet_old()
+	{
+		$this->load->model('m_data_tweets');
 		$this->load->model('m_data_uji');
 
 		$start_date 	= $this->input->post('start_date');
@@ -163,6 +226,60 @@ class Data extends CI_Controller {
 		}
 
 		redirect('data/data_uji');
+	}
+
+	public function get_tweets()
+	{
+		$start_date 	= $this->input->post('start_date');
+		$end_date 		= $this->input->post('end_date');
+
+		// converted to standard date twitter api
+		$start_date 	= new DateTime($start_date.' 00:00:00');
+		$end_date 		= new DateTime($end_date.' 00:00:00');
+		$start_date 	= $start_date->format('Y-m-d\TH:i:s\Z');
+		$end_date 		= $end_date->format('Y-m-d\TH:i:s\Z');
+
+		$data_tweets 	= $this->get_data_tweet($start_date, $end_date);
+
+		if (count($data_tweets) > 0) {
+			$delimiter = "|"; 
+		    $filename = "tweets_" . $start_date . " - " . $end_date .".csv"; 
+		     
+		    // Create a file pointer 
+		    $f = fopen('php://memory', 'w'); 
+		     
+		    // Set column headers 
+		    $fields = array('tweet_id', 'author_id', 'original_tweet', 'clean_tweet', 'created_dtm'); 
+		    fputcsv($f, $fields, $delimiter); 
+		     
+		    // Output each row of the data, format line as csv and write to file pointer 
+		    foreach ($data_tweets as $key) {
+		    	$key->original_tweet = str_replace("\n", "", $key->original_tweet);
+				$key->original_tweet = str_replace("\r", "", $key->original_tweet);
+
+				$key->clean_tweet = str_replace("\n", "", $key->clean_tweet);
+				$key->clean_tweet = str_replace("\r", "", $key->clean_tweet);
+
+		    	$lineData = array(
+		    		$key->tweet_id, 
+		    		$key->author_id,
+		    		$key->original_tweet,
+		    		$key->clean_tweet,
+		    		$key->created_dtm
+		    	); 
+		        fputcsv($f, $lineData, $delimiter); 
+		    }
+		     
+		    // Move back to beginning of file 
+		    fseek($f, 0); 
+		     
+		    // Set headers to download file rather than displayed 
+		    header('Content-Type: text/csv'); 
+		    header('Content-Disposition: attachment; filename="' . $filename . '";'); 
+		     
+		    //output all remaining data on a file pointer 
+		    fpassthru($f); 
+		}
 	}
 	
 }

@@ -75,9 +75,11 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
+	// 'hostname' => '/Applications/MAMP/tmp/mysql/mysql.sock',
 	'hostname' => 'localhost',
 	'username' => 'root',
-	'password' => 'password',
+	'port'		=> 8889,
+	'password' => 'root',
 	'database' => 'sentiment-analyzer',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
