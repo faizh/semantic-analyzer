@@ -31,8 +31,8 @@ class Report extends CI_Controller {
 	
 	public function index()
 	{
-		$result 	= file_get_contents('http://127.0.0.1:4996/analyzeNaiveBayes');
-		$response 	= json_decode($result);
+		// $result 	= file_get_contents('http://127.0.0.1:4996/analyzeNaiveBayes');
+		// $response 	= json_decode($result);
 
 		$this->load->model('m_data_uji');
 

@@ -31,20 +31,22 @@ class Dashboard extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->model('m_data_tweets');
+		$this->load->model(array('m_data_tweets', 'm_data'));
 
 		$positive_tweets		= $this->m_data_tweets->getByAttributes(array('sentiment' => 'positive'));
 		$negative_tweets		= $this->m_data_tweets->getByAttributes(array('sentiment' => 'negative'));
 		$neutral_tweets			= $this->m_data_tweets->getByAttributes(array('sentiment' => 'neutral'));
 		$total_tweet_words 		= $this->m_data_tweets->getTotalWords();
 		$count_total_tweets 	= $this->m_data_tweets->countTotalTweets();
+		$app_data 				= $this->m_data->getData();
 
 		$data 					= array(
-			'positive'			=> count($positive_tweets),
-			'negative'			=> count($negative_tweets),
-			'neutral'			=> count($neutral_tweets),
-			'total_tweet_words'	=> $total_tweet_words,
-			'total_tweets' 		=> $count_total_tweets
+			'positive'				=> count($positive_tweets),
+			'negative'				=> count($negative_tweets),
+			'neutral'				=> count($neutral_tweets),
+			'total_tweet_words'		=> $total_tweet_words,
+			'total_tweets' 			=> $count_total_tweets,
+			'presentase_data_uji'	=> $app_data->presentase_data_uji
 		);
 
 		$data['content'] 		= 'pages/v_dashboard';

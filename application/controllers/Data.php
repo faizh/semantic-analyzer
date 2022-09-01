@@ -209,6 +209,35 @@ class Data extends CI_Controller {
 	{
 		$this->load->model(array(
 			'm_data_tweets',
+			'm_data_uji',
+			'm_data'
+		));
+
+		$presentase_data_uji = $this->input->post('presentase_data_uji');
+
+		$this->m_data->delete_all();
+		$this->m_data_uji->delete_all();
+		$random_tweets = $this->m_data_tweets->getRandomTweets($presentase_data_uji);
+
+		foreach ($random_tweets as $tweet) {
+			$data_uji = array(
+				'tweet_id' 		=> $tweet->tweet_id,
+				'clean_tweet'	=> $tweet->clean_tweet,
+				'sentiment'		=> $tweet->sentiment
+			);
+
+			$this->m_data_uji->insert($data_uji);
+		}
+
+		$this->m_data->insert(array("presentase_data_uji" => $presentase_data_uji));
+
+		redirect('data/data_uji');
+	}
+
+	public function create_data_uji_old()
+	{
+		$this->load->model(array(
+			'm_data_tweets',
 			'm_data_uji'
 		));
 
@@ -280,6 +309,19 @@ class Data extends CI_Controller {
 		    //output all remaining data on a file pointer 
 		    fpassthru($f); 
 		}
+	}
+
+	public function analyze_data_uji()
+	{
+		$ctx = stream_context_create(array('http'=>
+		    array(
+		        'timeout' => 1200,  //1200 Seconds is 20 Minutes
+		    )
+		));
+		$result 	= file_get_contents('http://127.0.0.1:4996/analyzeNaiveBayes', false, $ctx);
+		$response 	= json_decode($result);
+
+		redirect('report');
 	}
 	
 }

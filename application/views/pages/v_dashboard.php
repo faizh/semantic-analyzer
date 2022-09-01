@@ -39,7 +39,7 @@
 											</div>
 										</div>
 									</div>
-									<h1 class="mt-1 mb-3">90%</h1>
+									<h1 class="mt-1 mb-3"><?= 100 - $presentase_data_uji ?>%</h1>
 								</div>
 							</div>
 						</div>
@@ -63,7 +63,7 @@
 									</div>
 								</div>
 							</div>
-							<h1 class="mt-1 mb-3">10%</h1>
+							<h1 class="mt-1 mb-3"><?= $presentase_data_uji ?>%</h1>
 						</div>
 					</div>
 				</div>

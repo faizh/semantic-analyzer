@@ -49,13 +49,13 @@ class M_data_tweets extends CI_Model {
         $this->db->truncate('t_data_tweets');
     }
 
-    public function getRandomTweets()
+    public function getRandomTweets($presentase)
     {
         $this->db->select('*');
         $results = $this->db->get('t_data_tweets')->result();
         
         $cnt_all_tweets = count($results);
-        $random_amount  = round((10 / 100) * $cnt_all_tweets);
+        $random_amount  = round(($presentase / 100) * $cnt_all_tweets);
 
         $this->db->select('*');
         $this->db->order_by('RAND()');

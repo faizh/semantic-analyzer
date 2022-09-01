@@ -7,7 +7,29 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header">
-						<a href="<?= base_url() ?>index.php/data/create_data_uji"><button class="btn btn-primary">Get Data Uji</button></a>
+						<div class="row">
+							<form action="<?= base_url() ?>index.php/data/create_data_uji" method="post">
+	                            <div class="row">
+	                                <div class="col-3">
+	                                    <select class="form-select form-control" aria-label=".form-select-sm example" name="presentase_data_uji">
+	                                        <option selected="" disabled>Presentase Data Uji</option>
+	                                        <option value="10">10%</option>
+	                                        <option value="20">20%</option>
+	                                        <option value="30">30%</option>
+	                                        <option value="40">40%</option>
+	                                    </select> 
+	                                </col>
+	                            </div>
+
+	                            <div class="row mt-2">
+	                                <div class="col-6">
+	                                    <button type="submit" class="btn btn-primary">Get Data Uji</button>
+	                                </div>
+	                            </div>
+	                            </br>
+	                        </form></br>
+						</div>
+
 						<div class="row">
 							<div class="col-12 col-lg-12 col-xxl-9 d-flex">
 								<div class="flex-fill" style="padding: 10px;">
